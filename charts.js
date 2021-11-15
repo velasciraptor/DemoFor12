@@ -81,7 +81,9 @@ function buildCharts(sample) {
       y: yticks,
       text: firstSampleLabels.slice(0,10).reverse(),
       type: 'bar',
-      orientation: 'h'
+      orientation: 'h',
+      marker:{
+        color: 'lightsalmon'}
     }];
 
     // 9. Create the layout for the bar chart. 
@@ -91,5 +93,76 @@ function buildCharts(sample) {
     };
     // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot("bar", barData, barLayout)
+    
+    // DELIVERABLE 2:
+    // 1. Create the trace for the bubble chart.
+    var bubbleData = [ {
+      x: firstSampleIds,
+      y: firstSampleValues,
+      text: firstSampleLabels,
+      mode: 'markers',
+      marker: {
+        size: firstSampleValues, 
+        color: firstSampleIds, 
+      }
+    }];
+
+    // 2. Create the layout for the bubble chart.
+    var bubbleLayout = {
+      title: 'Bacteria Cultures Per Sample',
+      xaxis: {title:'OTU ID'},
+      automargin: true,
+      hovermode: 'closest'
+    };
+
+    // 3. Use Plotly to plot the data with the layout.
+    Plotly.newPlot('bubble', bubbleData, bubbleLayout); 
+
+    // DELIVERABLE 3
+    // 1. Create a variable that filters the metadata array for the object with the desired sample number.
+    var metadataFilter = data.metadata.filter(sampleObj => sampleObj.id == sample);  
+
+    // 2. Create a variable that holds the first sample in the metadata array.
+    var metadataResult = metadataFilter[0];
+
+    // Create variables that hold the otu_ids, otu_labels, and sample_values.
+    
+    // 3. Create a variable that holds the washing frequency.
+    var washFreq = parseFloat(metadataResult.wfreq);
+
+    // 4. Create the trace for the gauge chart.
+    var gaugeData = [{
+      domain: {},
+      value: washFreq,
+      title: { text: '<b> Belly Button Washing Frequency</b> <br> Scrubs per Week'},
+      type: "indicator",
+      mode: "gauge+number",
+      gauge: {
+        axis: {
+          range: [0,10],
+          tickwidth:2
+        },
+        bar: {color: 'black'},
+        steps:[
+          {range: [0,2], color:'cornsilk'},
+          {range: [2,4], color:'bisque'},
+          {range: [4,6], color:'burlywood'},
+          {range: [6,8], color:'sienna'},
+          {range: [8,10], color:'maroon'}
+        ]
+      }
+    }];
+    
+    // 5. Create the layout for the gauge chart.
+    var gaugeLayout = { 
+        width: 700,
+        height: 500,
+        margin: { t: 25, r: 25, l: 25, b: 25 },
+        paper_bgcolor: "white",
+        font: { color: "black", family: "Arial" }
+    };
+
+    // 6. Use Plotly to plot the gauge data and layout.
+    Plotly.newPlot('gauge', gaugeData, gaugeLayout);
   });
 }
