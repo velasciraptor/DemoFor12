@@ -9,9 +9,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
-<body>
-
+<body style="background-color:rgb(188, 217, 233);">
+    <style>
+        div {text-align: center;}
+        p {text-align: center;}
+    </style>
   <div class="container">
+    </div>
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
         <h1>Belly Button Biodiversity Dashboard</h1>
@@ -19,9 +23,14 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-2">
+        <div class="col-md-12">
+            <p><b>Hello!</b><br>Welcome to the gross world of belly button bacteria! Start by clicking a a test subject ID number. <br> The bar chart will show you the top 10 bacteria's found in that person's stomach.<br> The gauge will show you how many times that person washed their belly button each week. <br> The scatter plot will show you how much bacteria was in each sample, while the color of the bubble distinguishes each type of bacteria. <br> Hover over any chart if you want to know more!</p>
+        </div>
+    </div>
+
+      <div class="col align-self-center">
         <div class="well">
-          <h5>Test Subject ID No.:</h5>
+          <h5>Test Subject ID No.:</h3>
           <!-- <select id="selDataset"></select> -->
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
         </div>
@@ -32,18 +41,18 @@
           <div id="sample-metadata" class="panel-body"></div>
         </div>
       </div>
-      <div class="col-md-5">
+
+      <div class="col align-self-center">
         <div id="bar"></div>
       </div>
-      <div class="col-md-5">
+
+      <div class="col align-self-center">
         <div id="gauge"></div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
+    
+      <div class="col align-self-center">
         <div id="bubble"></div>
       </div>
-    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
